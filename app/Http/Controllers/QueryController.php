@@ -214,10 +214,9 @@ class QueryController extends Controller
                 $query['options'] = trim(implode(',', $options), ' ,');
 
                 if(empty($query['options'])){
-                    $this->__setFlash('danger', 'Required Options Missing at question ');
                     $this->__is_paginate = false;
                     $this->__is_collection = false;
-                    return $this->__sendResponse('Query', [], 200, 'Required Options Missing.');
+                    return $this->__sendError('Required Options Missing.', [], 400);
                 }
             }
 
@@ -279,6 +278,8 @@ class QueryController extends Controller
 
         $query = Query::find($id);
 
+        $list['photo_views'] = Category::where(['parent_id' => $query['category_id']])->get(['id','name']);
+
         /** to be removed commented on Jan-2023 For tags mapped by questions (not in use now)  */
 //        $queryIds = array_column($query->toArray(),'id');
 //        $tags = Tag::whereIn('ref_id',$queryIds)->where(['ref_type' => 'query'])->get()->toArray();
@@ -288,9 +289,10 @@ class QueryController extends Controller
             $query['options']  = explode(',',$query['options']);
         }
 
+        $list['query_id'] = $id;
         $list['query'] = $query;
 
-        //dd($list);
+//        dd($list);
 
         $this->__is_paginate = false;
         $this->__is_collection = false;
@@ -304,70 +306,58 @@ class QueryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateQuery(Request $request)
+    public function updateQuery(Request $request,$id)
     {
-//        Helper::p($request->all());
         $this->__view = 'subadmin/questionnaire?page='.$request['page'];
-        $this->__is_redirect = true;
-
+        $this->__is_ajax = true;
+        $this->__collection = false;
+        $request['query_id'] = $id;
+        //<editor-fold desc="Validation">
         $param_rules['company_id']      = 'required';
-//        $param_rules['category']      = 'required|int';
+        $param_rules['query_id']        = 'required|int';
+        $param_rules['area']            = 'required|int';
+        $param_rules['question']        = 'required|string';
+        $param_rules['type']            = 'required';
+        $param_rules['is_required']     = 'required|in:true,false';
 
-        $param_rules['question.*']     = 'required|string';
-        $param_rules['query_id.*']          = 'required';
-        $param_rules['type.*']          = 'required';
-        $param_rules['option.*']        = 'required';
+        $param_rules['options.*']        = 'required_if:type,checkbox,radio|distinct';
+        $param_rules['help_photo']       = 'nullable|mimes:jpg,jpeg,png,gif,pdf';
+        $param_rules['photo_view']       = 'required_if:type,checkbox,radio';
 
-        $response = $this->__validateRequestParams($request->all(), $param_rules);
+        $customMessages['options.*.distinct'] = "The options have a duplicate value";
+        $customMessages['photo_view.required_if'] = "Photo View field is required";
+
+
+        $response = $this->__validateRequestParams($request->all(), $param_rules,$customMessages);
         if($this->__is_error == true){
             $error = \Session::get('error');
             $this->__setFlash('danger','Not updated Successfully' , $error['data']);
             return $response;
         }
-
-        $fileTypeError = [];
-        foreach ($request['question'] AS $key   => $item){
-            if ($request->hasFile('sample.'.$key)) {
-                $ext = $request['sample'][$key]->getClientOriginalExtension();
-                if(!in_array($ext,['jpg','jpeg','png','gif','pdf'])){
-                    /*IF NOT IN ARRAY*/
-                    $fileTypeError[] = 'In question no. '.($key + 1);
-                }
-            }
-        }
-
-        if(!empty($fileTypeError) ){
-            $this->__setFlash('danger', 'Invalid file type', $fileTypeError);
-            $this->__is_paginate = false;
-            $this->__is_collection = false;
-            return $this->__sendResponse('Query', [], 200, 'Invalid file type');
-        }
+        //</editor-fold>
 
         $updateResult = Query::updateQuery($request);
-//        Helper::pd($updateResult,'$updateResult');
 
         if(!empty($updateResult['error'])){
-            $this->__setFlash('danger', $updateResult['error']);
             $this->__is_paginate = false;
             $this->__is_collection = false;
-            return $this->__sendResponse('Query', [], 200, 'Required Options Missing.');
+            return $this->__sendError($updateResult['error'], [], 400);
         }
 
-        if (!empty($updateResult['query'])) {
-            $this->__setFlash('success', 'Updated Successfully');
-        } else {
-            $this->__setFlash('danger', 'Not Updated Successfully');
-        }
 
         $this->__is_paginate = false;
         $this->__collection = false;
-        return $this->__sendResponse('TenantQuery', [], 200,'Your survey has been updated successfully.');
+        return $this->__sendResponse('Query', [], 200,'Your query has been updated successfully.');
     }
 
 
     public function deleteQuery(Request $request,$id){
 
+        $this->__is_ajax = true;
+        $this->__is_paginate = false;
+        $this->__collection = false;
         $request['id'] = $id;
+        //<editor-fold desc="Validation">
         $param_rules['id'] = 'required|int|';
 
         $response = $this->__validateRequestParams($request->all(), $param_rules);
@@ -377,14 +367,12 @@ class QueryController extends Controller
             $this->__setFlash('danger', 'Not Deleted Successfully', $error['data']);
             return $response;
         }
+        //</editor-fold>
         $message = "Not Deleted Successfully";
 
         $pQ = ProjectQuery::where('query_id',$id)->exists();
 
         if($pQ){
-            $this->__is_ajax = true;
-            $this->__is_paginate = false;
-            $this->__collection = false;
             $message = title_case("Can't Delete. Question is filled in a project.");
             return $this->__sendError($message,[],400);
         }else{
@@ -395,10 +383,7 @@ class QueryController extends Controller
                 $message = "Deleted Successfully";
             }
         }
-//        die('die');
-        $this->__is_ajax = true;
-        $this->__is_paginate = false;
-        $this->__collection = false;
+
         return $this->__sendResponse('TenantQuery', ['message' => $message], 200,'Your questionnaire has been deleted successfully.');
     }
 

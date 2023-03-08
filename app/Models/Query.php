@@ -112,114 +112,75 @@ class Query extends Model
 
     public static function updateQuery($request){
         $question = $request['question'];
-        $queryIdArr = $request['query_id'];
+        $queryId = $request['query_id'];
         $type = $request['type'];
         $orderBy = $request['order_by'];
-        $option =   $request['option'];
+        $options =   $request['options'];
         $photo_view =   $request['photo_view'];
-        $naRule     = $request['na_rule'];
-//        $custom_tag =   $request['custom_tag'];
-//        $custom_tag_id =   $request['custom_tag_id'];
-
-        $result = [];
-
-        foreach ($question AS $key => $item) {
-
-            if (!empty($item)) {
+        $image_set =   $request['image_set'];
 
 
                 $queryUpdateData = [];
-                if ($request->hasFile('sample.' . $key)) {
+
+                if ($request->file('help_photo')) {
                     $queryUpdateData['image_url'] =
-                        Helper::uploadFile($request->file('sample.' . $key), 'sample_query', Config::get('constants.MEDIA_IMAGE_PATH'));
+                        Helper::uploadFile($request->file('help_photo'), 'sample_query', Config::get('constants.MEDIA_IMAGE_PATH'));
+                }else if ($image_set == 'false') {
+                    \Log::debug('image else '.$image_set);
+                    $queryUpdateData['image_url'] = "";
                 }
 
                 $queryUpdateData['company_id'] = $request['company_id'];
-                $queryUpdateData['query'] = $item;
-                $queryUpdateData['type'] = $type[$key];
-
-//                $queryUpdateData['order_by'] = $orderBy[$key];
-//                $queryUpdateData['options'] = ($type[$key] == 'text') ? '' : implode(',', $option[$key]);
+                $queryUpdateData['is_required'] = filter_var($request['is_required'], FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
+                $queryUpdateData['query'] = $question;
+                $queryUpdateData['type'] = $type;
                 $queryUpdateData['updated_at'] = date('Y-m-d H:i:s');
 
 
-                if (!empty($option[$key]) && ($type[$key] == 'text' || $type[$key] == 'date' || $type[$key] == 'sign')) {
+                if (!empty($options) && ($type == 'text' || $type == 'date' || $type == 'sign')) {
                     $queryUpdateData['options'] = '';
                 } else {
                     /**
                      * IF checkbox or radio
                      */
-                    if (!empty($naRule[$key])) {
-                        /** IF NA is selected */
-                        $queryUpdateData['photo_view_id'] = !empty($photo_view[$key]) ? $photo_view[$key] : NULL;
-                        if (!in_array('N/A', $option[$key])) {
-                            /** N.A is not request option Add */
-                            $option[$key] = array_prepend($option[$key], 'N/A');
-                        } else {
-
-                            echo "ELSE : $key";
-                        }
-                    } else {
-
-                        /** IF NA is not selected
-                         *      -> Need to remove NA if exists in options
-                         */
-                        $queryUpdateData['photo_view_id'] = NULL;
-
-                        if (in_array('N/A', $option[$key])) {
-                            /** N.A is IN request options
-                             *      -> Must remove it (cuz NA wasn't selected) *
-                             */
-                            if (($optionKey = array_search('N/A', $option[$key])) !== false) {
-                                unset($option[$key][$optionKey]);
-                            }
-                        }
+                    if (in_array('N/A', $options)) {
+                        $queryUpdateData['photo_view_id'] = !empty($photo_view) ? $photo_view : NULL;
                     }
-                    $queryUpdateData['options'] = trim(implode(',', $option[$key]), ' ,');
+
+//                    if (!empty($naRule[$key])) {
+//                        /** IF NA is selected */
+//
+//
+//                    } else {
+//
+//                        /** IF NA is not selected
+//                         *      -> Need to remove NA if exists in options
+//                         */
+//                        $queryUpdateData['photo_view_id'] = NULL;
+//
+//                        if (in_array('N/A', $option[$key])) {
+//                            /** N.A is IN request options
+//                             *      -> Must remove it (cuz NA wasn't selected) *
+//                             */
+//                            if (($optionKey = array_search('N/A', $option[$key])) !== false) {
+//                                unset($option[$key][$optionKey]);
+//                            }
+//                        }
+//                    }
+                    $queryUpdateData['options'] = trim(implode(',', $options), ' ,');
 
                     if(empty($queryUpdateData['options'])){
-//                        Helper::pd(['error' => 'Required Options Missing at question '.($key+1) ],'[\'error\' => \'Required Options Missing at question \'.($key+1) ]');
-                        return ['error' => 'Required Options Missing at question '.($key+1) ];
+                        return ['error' => 'Required Options Missing at question.'];
                     }
                 }
+                \Log::debug('is_required data: '.print_r([!empty($request['is_required'])] , 1));
+                \Log::debug('request data: '.print_r($request->all() , 1));
+                \Log::debug('update data: '.print_r($queryUpdateData , 1));
 
-                $qResult = self::where(['id' => $queryIdArr[$key]])->update($queryUpdateData);
-                $result['query'][$key] = $qResult;
+                $qResult = self::where(['id' => $queryId])->update($queryUpdateData);
 
-//                if (!empty($photo_view[$key]) && !empty($custom_tag[$key]) && !empty($custom_tag_id[$key])) {
-//                    $tag = [];
-//                    $tag['name']        =   $custom_tag[$key];
-//                    $tag['target_id']   =   $photo_view[$key];
-//
-//                    if(!empty($custom_tag_id[$key] )){
-//                        $tag['updated_at']  =   date('Y-m-d H:i:s');
-//                        $tagRes = Tag::where('id', $custom_tag_id[$key])->update($tag);
-//                    }
-//                    $result['query_tag'][$key] = $tagRes;
-//                }else if(!empty($photo_view[$key]) && !empty($custom_tag[$key])) {
-//
-//                    $tag = [];
-//                    $tag['target_id'] = $photo_view[$key];
-//                    $tag['name'] = $custom_tag[$key];
-//                    $tag['ref_id'] = $queryIdArr[$key];
-//                    $tag['ref_type'] = 'query';
-//                    $tag['company_id'] = $request['company_id'];
-//
-//
-//                    /*Insert*/
-//                    $tag['created_at']  =   date('Y-m-d H:i:s');
-////                    Helper::p($tag);
-//                    //$tagRes = Tag::insert($tag);
-//                }else{
-//
-//                }
-            }
-            else{
-                return FALSE;
-            }
-        }
-//        die('end');
-        return $result;
+
+        return $qResult;
     }
 
     public static function deleteQuery($id){

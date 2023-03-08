@@ -371,7 +371,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .panel-default>.panel-heading {
-    background-color: #F0F1F2;
+    background-color: transparent;
 }
 
 .panel-collapse {
@@ -2521,9 +2521,19 @@ input::-ms-input-placeholder {
     justify-content: space-between;
 }
 
-.add-question-sec .input-text {
-    margin-bottom: 20px;
+.add-dlete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.add-dlete li img {
+    width: 25px;
+    height: 25px;
+
+}
+
+
 
 .add-question-sec .input-text .input-group {
     width: 100%;
@@ -3129,6 +3139,50 @@ table.dataTable thead .sorting_desc_disabled:after {
 
 }
 
+.edit-accordian .panel-default {
+    background-color: transparent;
+}
+
+.edit-accordian .panel-heading .panel-title>a {
+    padding: 0 !important;
+}
+
+.edit-accordian .panel-collapse {
+    padding: 0 !important;
+}
+
+.edit-accordian .panel-body {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.panel-title>a::after {
+    content: none !important;
+}
+
+.edit-accordian .panel {
+    margin-bottom: 25px;
+}
+
+.inspection-area h1 {
+    margin-bottom: 12px !important;
+}
+
+.add_option .btn-add.ft-left {
+    border-radius: 12px;
+    padding: 0;
+    background-color: transparent;
+    color: red;
+    text-transform: uppercase;
+    float: right;
+    font-size: 13px;
+    text-align: center;
+    margin-left: 15px;
+    float: left;
+    border: 0;
+    display: block;
+}
+
 /* Ui Fixes End  */
 .setting-from-group [type="file"] {
     height: 0;
@@ -3231,6 +3285,78 @@ ul.dropdown-content {
 
 .nav.navbar-nav>li>.active-nav {
     color: #0082f1 !important;
+}
+
+.re-table tr td:last-child {
+    position: absolute;
+    right: 40px;
+}
+
+.close-icon {
+    border-left: 0;
+    flex-shrink: 100%;
+    min-height: 45px;
+    border: 2px solid #ededee;
+    border-left: 0;
+}
+
+.close-icon:hover,
+.close-icon:focus,
+.close-icon:active {
+    border-left: 0;
+    flex-shrink: 100%;
+    min-height: 45px;
+    border: 2px solid #ededee;
+    border-left: 0;
+}
+
+#project_page_controls {
+    padding-left: 14px !important;
+    padding-bottom: 60px !important;
+}
+
+.delete-drop {
+    background-color: transparent;
+    border: 0;
+}
+
+.drop-delte {
+    min-width: 20px;
+}
+
+.btn-secondary {
+    width: fit-content;
+    height: 39px;
+    background-color: #0082f1;
+    padding: 7px 40px;
+    margin: 0 20px 0 0 !important;
+    color: #fff;
+}
+
+.input-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-btn li {
+    margin-right: 10px;
+}
+
+.accordion {
+    max-width: 100% !important;
+}
+
+.card-body {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #fff;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.inspection-area h1 {
+    margin: 0 !important;
 }
 
 /* Css end  */

@@ -161,23 +161,24 @@
 
                                     <div class="col-md-12 form-group pull-right question_option">
                                         <div class="input-group">
-                                            <input type="text" name="option[{{$key}}][]" class="form-control inputs"
-                                                   placeholder="Option"
-                                                   value="{{($item['type'] == 'radio' || $item['type'] == 'checkbox') ? $opItem: '' }}">
-                                            <span class="input-group-btn remove_option"> <button class="btn btn-default inputs"
-                                                                                                 type="button"> <i
-                                                            class="fas fa-times"></i></button></span>
+                                            <input type="text" name="option[{{$key}}][]" class="form-control inputs" placeholder="Option" value="{{($item['type'] == 'radio' || $item['type'] == 'checkbox') ? $opItem: '' }}">
+                                            <span class="input-group-btn remove_option"> 
+                                                <button class="btn btn-default inputs" type="button">
+                                                     <i class="fas fa-times"></i>
+                                                    </button>
+                                                </span>
                                         </div>
                                     </div>
                                 @endforeach
                             @else
                                 <div class="col-md-12 form-group pull-right question_option">
                                     <div class="input-group">
-                                        <input type="text" name="option[{{$key}}][]" class="form-control inputs"
-                                               placeholder="Option" value="">
-                                        <span class="input-group-btn remove_option"> <button class="btn btn-default inputs"
-                                                                                             type="button"> <i
-                                                        class="fas fa-times"></i></button></span>
+                                        <input type="text" name="option[{{$key}}][]" class="form-control inputs" placeholder="Option" value="">
+                                        <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 form-group pull-right question_option">

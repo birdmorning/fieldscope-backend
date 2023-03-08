@@ -48,11 +48,11 @@
                                 <a href="" data-toggle="modal" data-target="#addHelpPhoto">Add Help Photo</a>
                                 <div class="switch-btn">
                                     <span>Required</span>
-                                    <button type="button" class="btn btn-sm btn-toggle" data-toggle="button"
+                                    <button type="button" class="btn btn-sm btn-toggle {{$data['query']['is_required'] ? 'active': 'focus' }}" data-toggle="button"
                                             aria-pressed="false" autocomplete="off">
                                         <div class="handle"></div>
                                     </button>
-                                    <input type="hidden" name="is_required" value="false" class="test_class"/>
+                                    <input type="hidden" name="is_required" value="{{$data['query']['is_required'] ? 'true' : 'false'}}" class="test_class"/>
                                 </div>
 
                             </div>
@@ -68,7 +68,7 @@
                                 <label for="basic-url">Inspection Area</label>
                                 <div class="input-group ">
                                     <select name="area" id="">
-                                        <option disabled selected>Select Inspection Area</option>
+                                        <option disabled>Select Inspection Area</option>
                                         @foreach($data['categories'] AS $key => $item)
 
                                             <option value="{{$item['id']}}"
@@ -79,10 +79,16 @@
                             </div>
                         </div>
 
-                        <div class="input-text photo_view " style="display: none;">
+                        <div class="input-text photo_view " style="@if(!in_array($data['query']['type'],['radio','checkbox']) && !empty($data['photo_views'])) display: none; @endif">
                             <label disabled>Photo View</label>
                             <div class="input-group ">
                                 <select name="photo_view" id="">
+                                    <option disabled>Select Photo View</option>
+                                    @foreach($data['photo_views'] AS $key => $item)
+                                        <option value="{{$item['id']}}"
+                                                {{$data['query']['photo_view_id'] == $item['id'] ? "selected" : ""}}
+                                        >{{$item['name']}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -107,45 +113,67 @@
                             </div>
                         </div>
 
+                            @php $data['query']['options'] = !empty($data['query']['options']) ? $data['query']['options'] : []; @endphp
                         <div class="form-group">
-                            <div class="input-text options" style="display: none;">
+                            <div class="input-text options" style="@if(!in_array($data['query']['type'],['radio','checkbox'])) display: none; @endif">
                                 <label for="basic-url" class="title">Single Select</label>
+
+                                @forelse($data['query']['options'] AS $optionKey => $optionItem)
                                 <div class="input-group">
-                                    <input type="text" name="options[]" data-index="0" class="form-control" value="N/A"
+                                    <input type="text" name="options[]" data-index="0" class="form-control" value="{{$optionItem}}"
                                            placeholder="Option 1">
+                                           <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" name="options[]" data-index="1" class="form-control"
-                                           placeholder="Option 2">
-                                </div>
+                                @empty
+                                    <label for="basic-url" class="title"></label>
+                                    <div class="input-group">
+                                        <input type="text" name="options[]" data-index="0"  value="N/A" class="form-control" placeholder="Option 1">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="text" name="options[]" data-index="1" class="form-control" placeholder="Option 2">
+                                    </div>
+                                @endforelse
                             </div>
                             <div class="add_option" style="display: none;">
-                                <a href="" class=" btn-add ft-left">Add Option</a>
+                            <ul class="add-dlete">
+                                    <li><a href="" class="">Add Option</a></li>
+                                    <li><a href="" class=""><img src="{{asset('assets/images/delete_icon.png')}}" alt=""></a></li>
+                                </ul>
+                                
                             </div>
                         </div>
 
-                        <input type="file" style="display: none;" name="help_photo"/>
 
-                        <div class="btn-group btn-group-toggle option_types" data-toggle="buttons">
-                            <label class="btn btn-secondary {{$data['query']['type'] == "text" ? "selected" : ""}} active">
-                                <input type="radio" name="type" id="option1" value="text" autocomplete="off" checked>
-                                Input Field
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option2" value="radio" autocomplete="off"> Single
-                                Select
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="checkbox" autocomplete="off"> Multi
-                                Select
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="date" autocomplete="off"> Date
-                            </label>
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="sign" autocomplete="off"> Sign
-                            </label>
-                        </div>
+
+                            <div class="btn-group btn-group-toggle option_types" data-toggle="buttons">
+                                <label class="btn btn-secondary {{$data['query']['type'] == "text" ? "active" : ""}}">
+                                    <input type="radio" name="type" id="option1" value="text" autocomplete="off"
+                                            checked="{{$data['query']['type'] == "radio" ? "checked" : ""}}" />
+                                    Input Field
+                                </label>
+                                <label class="btn btn-secondary {{$data['query']['type'] == "radio" ? "active" : ""}}">
+                                    <input type="radio" name="type" id="option2" value="radio" autocomplete="off"
+                                           checked="{{$data['query']['type'] == "radio" ? "checked" : ""}}" /> Single
+                                    Select
+                                </label>
+                                <label class="btn btn-secondary {{$data['query']['type'] == "checkbox" ? "active" : ""}}">
+                                    <input type="radio" name="type" id="option3" value="checkbox" autocomplete="off"
+                                           checked="{{$data['query']['type'] == "checkbox" ? "checked" : ""}}" /> Multi
+                                    Select
+                                </label>
+                                <label class="btn btn-secondary {{$data['query']['type'] == "date" ? "active" : ""}}">
+                                    <input type="radio" name="type" id="option3" value="date" autocomplete="off"
+                                           checked="{{$data['query']['type'] == "date" ? "checked" : ""}}" /> Date
+                                </label>
+                                <label class="btn btn-secondary {{$data['query']['type'] == "sign" ? "active" : ""}}">
+                                    <input type="radio" name="type" id="option3" value="sign" autocomplete="off"
+                                           checked="{{$data['query']['type'] == "sign" ? "checked" : ""}}" /> Sign
+                                </label>
+                            </div>
 
                         <div class="add-cancel-bnt">
                             <button type="submit" class="btn btn-save bg-modified" data-toggle="modal"
@@ -164,7 +192,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                {{-- To be removed hidded on Mar-2023--}}
+                <div class="col-md-4 query_list hide">
                     @foreach($data['categories'] AS $catKey => $catItem)
                         @if($catItem['category_survey']->isNotEmpty())
                         <div class="inspection-area">
@@ -178,8 +207,8 @@
                                         <p>{{$surveyItem->query}}</p>
                                     </div>
                                     <ul class="d-flex align-items-center">
-                                        <li><a href="{{$surveyItem->id}}">Edit</a></li>
-                                        <li><a href="{{$surveyItem->id}}">Delete</a></li>
+                                        <li><a class="edit_query" href="{{url("subadmin/questionnaire/editQuestionnaireDetails/".$surveyItem->id)}}">Edit</a></li>
+                                        <li><a class="delete_query" data-id="{{$surveyItem->id}}" href="">Delete</a></li>
                                     </ul>
                                 </div>
                             @endforeach
@@ -187,6 +216,42 @@
                         @endif
                     @endforeach
                 </div>
+                <div class="col-md-4">
+                    <div class="panel-group edit-accordian" id="accordion" role="tablist" aria-multiselectable="true">
+                    @foreach($data['categories'] AS $catKey => $catItem)
+                        @if($catItem['category_survey']->isNotEmpty())
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading{{$catItem->id}}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$catItem->id}}" aria-expanded="true" aria-controls="collapse{{$catItem->id}}">
+                                    <div class="inspection-area">
+                                    <h1>{{$catItem->name}}</h1>
+                                    </div>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{$catItem->id}}" class="panel-collapse collapse @if($catKey == 0) in @endif" role="tabpanel" aria-labelledby="heading{{$catItem->id}}">
+                                <div class="panel-body">
+                                <div class="inspection-area-edit">
+                            @foreach($catItem['category_survey'] AS $surveyKey => $surveyItem)
+                                <div class="pre-inspection pre-bg-color">
+                                    <div class="pre-title">
+                                        <p>{{$surveyItem->query}}</p>
+                                    </div>
+                                    <ul class="d-flex align-items-center">
+                                        <li><a href="{{$surveyItem->id}}">Edit</a></li>
+                                        <li><a class="delete_query" data-id="{{$surveyItem->id}}" href="">Delete</a></li>
+                                    </ul>
+                                </div>
+                            @endforeach
+                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                    @endforeach
+                    </div>
+                </div>    
                 </form>
             </div>
 
@@ -213,7 +278,7 @@
                     </div>
                     <div class="modal-footer footer-close-button">
                         <div class="add-cancel-bnt">
-                            <button type="submit" class="btn btn-save bg-modified">
+                            <button type="button" class="btn btn-save bg-modified" data-dismiss="modal">
                                 <ul class="add-cancel-btn">
                                     <li>×</li>
                                     <li>Close</li>
@@ -228,73 +293,70 @@
     </section>
     <div class="modal fade" id="addHelpPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog add-project-modal upload-csv-modal" role="document">
-            <form id="js-upload-form" method="POST" action="{{url('subadmin/report/storeLogo')}}" enctype="multipart/form-data">
-                {{csrf_field()}}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="header-content">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h3 class="modal-title text-left">Company Logo</h3>
-                        </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title text-left">Help Photo</h3>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="upload-drop-zone @if(!empty($report->logo_path)) hide @endif" id="drop-zone">
-                                    <div class="drop-cvs" >
-                                        <div class="cvs-border" >
-                                            <div class="img-cvs">
-                                                <img src="{{asset('assets/images/csvs-img.png')}}" alt="...">
-                                            </div>
-                                            <div class="cvs-import-tile text-center">
-                                                <p>Drag and drop to upload your CSV file </p>
-                                                <p><span>Acceptable Formats:</span>jpeg, gif, png, pdf</p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row image_preview @if(empty($data['query']['image_url'])) hide @endif" >
+                                @if(!empty($data['query']['image_url'])) <input type="hidden" name="image_set" value="true" /> @endif
+                                <div class="col-md-12 text-center">
+                                    <img  src="{{url("uploads/media/".$data['query']['image_url'])}}" class="img-thumbnail" style="max-height: 300px;"/>
+                                </div>
+                                <div class="col-md-12 text-center pt-3">
+                                    <button type="button" class="btn btn-danger image_remove">Remove</button>
+                                </div>
+                            </div>
 
-                                                <div class="fileUpload btn-broswe blue-btn btn width100">
-                                                <span><ul class="add-cancel-btn">
-                                                    <li class="browse-plus">+</li>
-                                                    <li>Browse</li>
-                                                </ul></span>
-                                                    <input name="logo" type="file" id="js-upload-files" class="uploadlogo @if(!empty($report->logo_path)) {{"hide"}} @endif"/>
-                                                </div>
+                            {{-- <div class="row logo_preview">
+                                 <div class="col-md-12 text-center">
+                                     <img  src="" class="img-thumbnail hide" style="max-height: 300px;"/>
+                                 </div>
+                             </div>--}}
+
+
+                                <div class="drop-cvs @if(!empty($data['query']['image_url'])) hide @endif" >
+                                    <div class="upload-drop-zone " id="drop-zone">
+                                    <div class="cvs-border" >
+                                        <div class="img-cvs">
+                                            <img src="{{asset('assets/images/csvs-img.png')}}" alt="...">
+                                        </div>
+                                        <div class="cvs-import-tile text-center">
+                                            <p>Drag and drop to upload your CSV file </p>
+                                            <p><span>Acceptable Formats:</span>jpeg, gif, png, pdf</p>
+
+                                            <div class="fileUpload btn-broswe blue-btn btn width100">
+                                            <span><ul class="add-cancel-btn">
+                                                <li class="browse-plus">+</li>
+                                                <li>Browse</li>
+                                            </ul></span>
+                                                <input name="logo" type="file" id="js-upload-files" class="uploadlogo @if(!empty($data['query']['image_url'])) {{"hide"}} @endif"/>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                {{-- <div class="row logo_preview">
-                                     <div class="col-md-12 text-center">
-                                         <img  src="" class="img-thumbnail hide" style="max-height: 300px;"/>
-                                     </div>
-                                 </div>--}}
-
-
-                                <div class="row image_preview @if(empty($report->logo_path)) hide @endif" >
-                                    @if(!empty($report->logo_path)) <input type="hidden" name="image_set" value="true" /> @endif
-                                    <div class="col-md-12 text-center">
-                                        <img  src="{{url("uploads/report_templates/".$report->logo_path)}}" class="img-thumbnail" style="max-height: 300px;"/>
-                                    </div>
-                                    <div class="col-md-12 text-center pt-3">
-                                        <button type="button" class="btn btn-danger image_remove">Remove</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer footer-switch-btn">
-                        <div class="switch-btn">
-                        </div>
-                        <div class="add-cancel-bnt">
-                            <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
-                                <ul class="add-cancel-btn">
-                                    <li>-</li>
-                                    <li> Close</li>
-                                </ul>
-                            </button>
-                        </div>
+                </div>
+                <div class="modal-footer footer-switch-btn">
+                    <div class="switch-btn">
+                    </div>
+                    <div class="add-cancel-bnt">
+                        <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                            <ul class="add-cancel-btn">
+                                <li>-</li>
+                                <li> Close</li>
+                            </ul>
+                        </button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection
@@ -321,26 +383,37 @@
                 e.preventDefault()
 
                 var fd = new FormData($('#editQuestionForm')[0]);
+                let image_set = $(".image_preview").find("input[name='image_set']").first().val();
 
-                if (typeof (help_photo) !== 'undefined') {
+                console.log('not equal undefined',typeof (help_photo) !== 'undefined', help_photo);
+                console.log('image_set',$(".image_preview").find("input[name='image_set']").first().val());
+
+                if (typeof (help_photo) !== 'undefined' ) {
                     fd.append('help_photo', help_photo[0]);
+                }else{
+                    fd.append('image_set',$(".image_preview").find("input[name='image_set']").first().val());
                 }
 
                 $.ajax({
                     type: "POST",
                     enctype: 'multipart/form-data',
-                    url: '{{URL::to('subadmin/questionnaire/store')}}',
+                    url: '{{URL::to('subadmin/questionnaire/update/'.$data['query_id'])}}',
                     data: fd,
                     processData: false,
                     contentType: false,
                     cache: false,
-                    success: (data) => {
-                        console.log('ajax good', $(".alert-success.success"));
-                        $('#companyLogoModal').modal('toggle');
-                        $("div.alert-success.success").text(data.message).show();
-                        setTimeout(() => {
-                            $("div.alert.alert-success.success").hide();
-                        }, 2000);
+                    success: (response) => {
+                        // console.log('ajax good', $(".alert-success.success"));
+                        // $('#companyLogoModal').modal('toggle');
+                        // $("div.alert-success.success").text(response.message).show();
+                        // setTimeout(() => {
+                        //     $("div.alert.alert-success.success").hide();
+                        // }, 8000);
+
+                        let alertTitle = response.code !== 200 ? "Error": "Success" ;
+                        $("#alertModal").find(".modal-title").text(alertTitle);
+                        $("#alertModal").find(".updated-title p").text(response.message);
+                        $("#alertModal").modal({show: true});
                     }
                 });
 
@@ -388,6 +461,7 @@
 
             let optionTypes = ['radio', 'checkbox'];
             let type = 'text';
+            let status = 400;
 
             $("button.image_remove").on('click', function (e) {
                 console.log('clicked')
@@ -395,29 +469,27 @@
                 let $imagePreview = $(this).closest('.image_preview');
                 let $modalBody = $(this).closest('.modal-body');
 
-                console.log('$imagePreview', $imagePreview);
-                console.log('$modalBody', $modalBody);
-                console.log('drop-zone', $modalBody.find(".upload-drop-zone").first());
+                // console.log('$imagePreview', $imagePreview);
+                // console.log('$modalBody', $modalBody);
+                // console.log('drop-zone', $modalBody.find(".upload-drop-zone").first());
 
-                console.log('class', $(this).attr('class'));
+                console.log('image_set', $imagePreview.find("input[name='image_set']").first() ,$imagePreview.find("input[name='image_set']").val());
 
-                /** For cover image */
-                if ($(this).hasClass('cover')) {
-                    console.log('cover_image', $modalBody.find(".form-group.cover_image").first());
-                    $modalBody.find(".form-group.cover_image").first().removeClass("hide");
-                }
 
-                $modalBody.find(".upload-drop-zone").first().removeClass("hide");
+                $modalBody.find(".drop-cvs").first().removeClass("hide");
                 $imagePreview.addClass("hide");
-                $imagePreview.find("input[name='image_set']").first().attr("disabled", true);
+                $imagePreview.find("input[name='image_set']").first().attr("disabled", true).val(false);
             });
 
             $('.btn-toggle').on('click', function (e) {
-                let state = $(this).closest('.modal-footer').find('input[name="is_required"]').val();
+                let state = $(this).closest('.switch-btn').find('input[name="is_required"]').val();
+                console.log('is_required state',state);
                 if (state === 'true') {
                     $(this).closest('.switch-btn').find('input[name="is_required"]').val(false); // Toggling
+                    console.log('is_required Toggling off');
                 } else {
                     $(this).closest('.switch-btn').find('input[name="is_required"]').val(true); // Toggling
+                    console.log('is_required Toggling on');
                 }
             });
 
@@ -442,9 +514,19 @@
                         <label for="basic-url" class="title">${title}</label>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="0"  value="N/A" class="form-control" placeholder="Option 1">
+                            <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="1" class="form-control" placeholder="Option 2">
+                            <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>`;
 
                     $(".options").html(optionsHtml).show();
@@ -462,6 +544,11 @@
                 let index = $(".options").find('.form-control').last().data('index');
                 let optionHtml = `<div class="input-group">
                             <input type="text" name="options[]" data-index="${index + 1}" class="form-control" placeholder="Option ${index + 2}">
+                            <span class="input-group-btn remove_option "> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>`;
                 $(".options").append(optionHtml);
             });
@@ -490,6 +577,38 @@
                     }
                 });
             }
+
+            $(".delete_query").on("click",function(e){
+                e.preventDefault();
+               let id = $(this).data('id');
+                console.log(id);
+
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: `{{URL::to('subadmin/questionnaire/delete')}}/${id}`,
+                    data: [],
+                    async: false,
+                    contentType: false,
+                    success: (response) => {
+                        status = response.code;
+
+                        let alertTitle = response.code !== 200 ? "Error": "Success" ;
+                        $("#alertModal").find(".modal-title").text(alertTitle);
+                        $("#alertModal").find(".updated-title p").text(response.message);
+                        $("#alertModal").modal({show: true});
+
+
+                        // console.log($(this).closest(".inspection-area-edit").find(".edit_query"));
+                    }
+                });
+            });
+
+            $("#alertModal").on("hidden.bs.modal", function () {
+                if(status == 200){
+                    window.location = $(".query_list").find(".edit_query").first().attr('href');
+                }
+            });
         });
     </script>
 @endpush

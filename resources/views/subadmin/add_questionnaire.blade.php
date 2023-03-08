@@ -78,7 +78,9 @@
                                 </div>
                             </div>
                             <div class="add_option" style="display: none;">
-                                <a href="" class=" btn-add ft-left">Add Option</a>
+                                <ul class="add-dlete">
+                                    <li><a href="" class="">Add Option</a></li>
+                                </ul>
                             </div>
                         </div>
 
@@ -87,21 +89,42 @@
                         <div class="btn-group btn-group-toggle option_types" data-toggle="buttons">
                             <label class="btn btn-secondary active">
                                 <input type="radio" name="type" id="option1" value="text" autocomplete="off" checked>
-                                Input Field
+                                <ul class="input-btn">
+                                <li><img src="{{asset('assets/images/plus-cion.png')}}" alt=""></li>
+                                <li> Input Field</li>
+                              </ul>
+                               
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option2" value="radio" autocomplete="off"> Single
-                                Select
+                                <input type="radio" name="type" id="option2" value="radio" autocomplete="off">
+                                <ul class="input-btn">
+                                <li><img src="{{asset('assets/images/plus-cion.png')}}" alt=""></li>
+                                <li>  Single Select</li>
+                              </ul>
+                               
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="checkbox" autocomplete="off"> Multi
-                                Select
+                                <input type="radio" name="type" id="option3" value="checkbox" autocomplete="off"> 
+                              <ul class="input-btn">
+                                <li><img src="{{asset('assets/images/plus-cion.png')}}" alt=""></li>
+                                <li>  Multi Select</li>
+                              </ul>
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="date" autocomplete="off"> Date
+                                <input type="radio" name="type" id="option3" value="date" autocomplete="off">
+                                <ul class="input-btn">
+                                <li><img src="{{asset('assets/images/plus-cion.png')}}" alt=""></li>
+                                <li>   Date</li>
+                              </ul>
+                                
                             </label>
                             <label class="btn btn-secondary">
-                                <input type="radio" name="type" id="option3" value="sign" autocomplete="off"> Sign
+                                <input type="radio" name="type" id="option3" value="sign" autocomplete="off">
+                                <ul class="input-btn">
+                                <li><img src="{{asset('assets/images/plus-cion.png')}}" alt=""></li>
+                                <li>  Sign</li>
+                              </ul>
+                               
                             </label>
                         </div>
 
@@ -128,6 +151,39 @@
         <!-- New Work  End -->
 </section>
 
+<!-- Alert Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog add-project-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="header-content">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title text-left">Updated</h3>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="updated-title">
+                            <p>Your inspection area question has been updated!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer footer-close-button">
+                <div class="add-cancel-bnt">
+                    <button type="button" class="btn btn-save bg-modified" data-dismiss="modal">
+                        <ul class="add-cancel-btn">
+                            <li>×</li>
+                            <li>Close</li>
+                        </ul>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Alert Modal End -->
 <div class="modal fade" id="addHelpPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog add-project-modal upload-csv-modal" role="document">
         <form id="js-upload-form" method="POST" action="{{url('subadmin/report/storeLogo')}}" enctype="multipart/form-data">
@@ -460,13 +516,18 @@
                 processData: false,
                 contentType: false,
                 cache: false,
-                success: (data) => {
-                    console.log('ajax good', $(".alert-success.success"));
-                    $('#companyLogoModal').modal('toggle');
-                    $("div.alert-success.success").text(data.message).show();
-                    setTimeout(() => {
-                        $("div.alert.alert-success.success").hide();
-                    }, 2000);
+                success: (response) => {
+                    // console.log('ajax good', $(".alert-success.success"));
+                    // $('#companyLogoModal').modal('toggle');
+                    // $("div.alert-success.success").text(data.message).show();
+                    // setTimeout(() => {
+                    //     $("div.alert.alert-success.success").hide();
+                    // }, 2000);
+
+                    let alertTitle = response.code !== 200 ? "Error": "Success" ;
+                    $("#alertModal").find(".modal-title").text(alertTitle);
+                    $("#alertModal").find(".updated-title p").text(response.message);
+                    $("#alertModal").modal({show: true});
                 }
             });
 
@@ -568,9 +629,19 @@
                         <label for="basic-url" class="title">${title}</label>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="0"  value="N/A" class="form-control" placeholder="Option 1">
+                            <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="1" class="form-control" placeholder="Option 2">
+                            <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>`;
 
                 $(".options").html(optionsHtml).show();
@@ -588,6 +659,11 @@
             let index = $(".options").find('.form-control').last().data('index');
             let optionHtml = `<div class="input-group">
                             <input type="text" name="options[]" data-index="${index + 1}" class="form-control" placeholder="Option ${index + 2}">
+                            <span class="input-group-btn remove_option"> 
+                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </span>
                         </div>`;
             $(".options").append(optionHtml);
         });
@@ -616,6 +692,13 @@
                 }
             });
         }
+
+
+        $(".options").on('click',".close-icon",function (){
+           alert('test clsoe');
+
+           $(this).closest('.input-group').remove();
+        });
     });
 </script>
 @endpush

@@ -189,9 +189,9 @@ Route::group(['middleware' => ['login.auth','admin.auth'], 'prefix'=>'subadmin',
         Route::get('questionnaire_datatable', 'QueryController@queryDatatable');
         Route::get('questionnaire/add', 'QueryController@queryCreate');
         Route::post('questionnaire/store', 'QueryController@storeQuery');
-        Route::post('delete/questionnaire/{id}', 'QueryController@deleteQuery');
+        Route::post('questionnaire/delete/{id}', 'QueryController@deleteQuery');
         Route::get('questionnaire/editQuestionnaireDetails/{id}', 'QueryController@editQueryDetails');
-        Route::post('questionnaire/update', 'QueryController@updateQuery');
+        Route::post('questionnaire/update/{id}', 'QueryController@updateQuery');
         Route::get('questionnaire/edit_select', 'QueryController@editSelect');
         Route::get('questionnaire/edit_select/edit_questionnaire', 'QueryController@edit_questionnaire'); //Edit
         Route::get('questionnaire/add/select_questionnaire_edit_area', 'QueryController@select_questionnaire_edit_area');
