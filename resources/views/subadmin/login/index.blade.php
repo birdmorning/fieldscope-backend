@@ -44,7 +44,9 @@
                         <div class="row" style="width: 100%;margin:0;">
                             <div class="col-md-4 login-leftsidesec py-5 px-4 px-xl-5">
                                 <div class="login-headerlogo">
-                                    <a href="/"><img src="{{asset('image/logo-field.png')}}" alt="login header logo" width={159} height={120} /></a>
+                                    <a href="/">
+                                        <img src="{{asset('image/logo-field.png')}}" alt="login header logo" class="login-image" width={159} height={120} />
+                                    </a>
                                 </div>
                                 <!-- <div class="login-afterlogotypo">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>

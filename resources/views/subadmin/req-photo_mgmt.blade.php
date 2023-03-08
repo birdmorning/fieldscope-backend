@@ -332,7 +332,7 @@
 
                 <div class="row new-card-row user-type-table">
                     <div class="col-12 col-md-12">
-                        <table class="table table-striped" id="example" style="width:100%;">
+                        <table class="table table-striped re-table" id="example" style="width:100%;">
                             <thead >
                             <tr class="table-head">
                                 <th class="left w-20">Inspection Area</th>

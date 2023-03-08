@@ -12,6 +12,7 @@
         }
         #project_page_controls{
             padding-left: 41px;
+            padding-bottom: 50px !important;
         }
 
         .paginationjs .paginationjs-pages li>a{
@@ -373,7 +374,6 @@
                     </div>
                 </div> -->
             </div>  
-            
 
         </div>
     </div>
@@ -519,7 +519,7 @@
 </div>
 
 <!-- Add Project Modal -->
-<div class="modal fade " id="myModal" role="dialog">
+<div class="modal fade " id="myModal"  tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog add-project-modal">
         <!-- Modal content-->
         <form id="add_form" action="{{URL::to('subadmin/project/store')}}" method="POST">
@@ -601,12 +601,12 @@
 {{-- Filter Modal Start --}}
 <div class="modal fade " id="myModalFilter" tabindex="-1" role="dialog">
     <div class="modal-dialog " role="document">
-        <div class="modal-content ">
+        <div class="modal-content add-project-modal">
             <div class="modal-header logoimageheader">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title text-left">Add Filter</h3>
-                <hr />
+                    <div class="header-content">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title text-left">Add Filter</h3>
+                    </div>
             </div>
 
             <form class="filters">
@@ -651,10 +651,22 @@
 
                 </div>
                 <div class="modal-footer logoimagefooter">
-                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                    <!-- <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-save bg-modified filter_submit">Confirm
+                    </button> -->
+                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                        <ul class="add-cancel-btn">
+                            <li>-</li>
+                            <li> Cancel</li>
+                        </ul>
+                    </button>
+                    <button type="submit" class="btn btn-save bg-modified">
+                        <ul class="add-cancel-btn">
+                            <li>+</li>
+                            <li>Save</li>
+                        </ul>
                     </button>
                 </div>
             </form>
@@ -1066,6 +1078,7 @@
             $('#add_form').submit(function(){
                 $(this).find('.btn-save').attr('disabled',true);
                 $('#myModal').modal('toggle');
+                $('#myModal').addClass('in');
             });
 
             $('#example').on('click','.myImg',function(){

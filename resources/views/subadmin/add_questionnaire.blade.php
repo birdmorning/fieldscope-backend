@@ -629,16 +629,16 @@
                         <label for="basic-url" class="title">${title}</label>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="0"  value="N/A" class="form-control" placeholder="Option 1">
-                            <span class="input-group-btn remove_option"> 
-                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                            <span class="input-group-btn remove_option">
+                                            <button class="btn btn-default inputs close-icon" type="button">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </span>
                         </div>
                         <div class="input-group">
                             <input type="text" name="options[]" data-index="1" class="form-control" placeholder="Option 2">
-                            <span class="input-group-btn remove_option"> 
-                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                            <span class="input-group-btn remove_option">
+                                            <button class="btn btn-default inputs close-icon" type="button">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </span>
@@ -659,8 +659,8 @@
             let index = $(".options").find('.form-control').last().data('index');
             let optionHtml = `<div class="input-group">
                             <input type="text" name="options[]" data-index="${index + 1}" class="form-control" placeholder="Option ${index + 2}">
-                            <span class="input-group-btn remove_option"> 
-                                            <button class="btn btn-default inputs close-icon" type="button"> 
+                            <span class="input-group-btn remove_option">
+                                            <button class="btn btn-default inputs close-icon" type="button">
                                                 <i class="fas fa-times"></i>
                                             </button>
                                         </span>

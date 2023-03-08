@@ -8,6 +8,10 @@
     src: url('../poppins/Poppins-Bold.ttf');
 }
 
+html {
+    overflow-x: hidden !important;
+}
+
 body {
     min-height: 100vh;
     font-family: 'Poppins' !important;
@@ -1371,7 +1375,6 @@ ul {
 }
 
 .add-project-modal .modal-footer .btn-close .add-cancel-btn li {
-    margin-right: 10px;
     color: #0082f1;
     font-weight: 100 !important;
 }
@@ -1800,7 +1803,7 @@ figure.effect-sadie:hover p {
 .card-title-photo-feed h1 {
     padding: 0 20px;
     color: #0082f1;
-    line-height: 0.05;
+
 }
 
 .card-title-photo-feed .breadcrumb {
@@ -1826,7 +1829,7 @@ figure.effect-sadie:hover p {
 }
 
 .card-footer-photo-feed {
-    padding: 10px 10px 0 10px;
+    padding: 10px 5px 0 5px;
 
 }
 
@@ -3347,16 +3350,24 @@ ul.dropdown-content {
     max-width: 100% !important;
 }
 
-.card-body {
+/* .card-body {
     border-radius: 0;
     box-shadow: none;
     background-color: #fff;
     padding: 0 !important;
     margin: 0 !important;
-}
+} */
 
 .inspection-area h1 {
     margin: 0 !important;
+}
+
+.new-card .address-icon p {
+    margin-left: 8px !important;
+}
+
+.card-footer-photo-feed ul>li span {
+    padding-right: 5px;
 }
 
 /* Css end  */
@@ -3413,6 +3424,10 @@ ul.dropdown-content {
     .card-details-modified>h5 {
         margin-left: 5rem;
     }
+
+    html {
+        overflow-x: hidden !important;
+    }
 }
 
 @media (max-width: 1450px) {
@@ -3422,6 +3437,9 @@ ul.dropdown-content {
         margin-left: 3rem;
     }
 
+    html {
+        overflow-x: hidden !important;
+    }
 }
 
 @media (min-width: 1600px) {
@@ -3430,12 +3448,40 @@ ul.dropdown-content {
 
     }
 
+    html {
+        overflow-x: hidden !important;
+    }
+
 }
 
-@media (max-width: 1299px) {
+@media screen and (max-width: 1399px) {
 
-    .search-input {
-        display: none;
+    .navbar-modified>li {
+        margin: 0 10px;
+    }
+
+    .nav.navbar-nav>li>a {
+        font-size: 14px;
+    }
+
+    .user-profile-li>a>span {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .site_title.menutoggle-modified .img-responsive {
+        width: 140px;
+    }
+
+    .header_static .nav-flex .search-input input {
+        width: 190px;
+        height: 35px;
+        font-size: 13px;
+        padding-left: 35px;
+    }
+
+    .header_static .nav-flex .search-input img {
+        top: 8px;
     }
 
     table {
@@ -3455,9 +3501,38 @@ ul.dropdown-content {
     .new-card-row .new-card li p {
         font-size: 12px;
     }
+
+
+    .login-headerlogo .login-image {
+        width: 240px !important;
+        height: 92px !important;
+    }
+
+    .login-headerlogo {
+        margin-bottom: 10px;
+    }
+
+    .ml-auto.text-center.login-icondiv {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    html {
+        overflow-x: hidden !important;
+    }
+
+    .row {
+        padding: 0;
+        margin: 0;
+    }
+
 }
 
-@media (max-width: 991) {
+@media screen and (max-width: 991) {
+    html {
+        overflow-x: hidden !important;
+    }
 
     table {
         width: 100%;
@@ -3465,4 +3540,31 @@ ul.dropdown-content {
 
     }
 
+    .nav.navbar-nav>li>a {
+        font-size: 12px;
+    }
+
+    .navbar-modified>li {
+        margin: 0 6px;
+    }
+
+    .header_static .nav-flex .search-input input {
+        width: 125px;
+        font-size: 12px;
+        height: 30px;
+        padding-left: 26px;
+    }
+
+    .header_static .nav-flex .search-input {
+        right: 50px;
+    }
+
+    .header_static .nav-flex .search-input img {
+        top: 9px;
+        width: 13px;
+    }
+
+    .user-type-table table {
+        width: 800px !important;
+    }
 }

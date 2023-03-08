@@ -75,7 +75,7 @@
                      </div>
                     <div class="row  new-card-row user-type-table" >
                         <div class="col-12 col-md-12">
-                            <table class="table table-striped" style="width: 1858px; margin:30px auto ;">
+                            <table class="table table-striped" >
                                 <thead >
                                     <tr class="table-head">
                                         <th class="left w-20">Report Feature</th>
@@ -1773,7 +1773,16 @@
             var add_more_item = `<span><input type="text" name="section_item[]" placeholder="Item" class="form-control iteminput">
                                  <input type="number" name="section_price[]" placeholder="Price" class="form-control priceinput">
                                  <div class="editdelicons">
-                                    <a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>
+                                 <div class="dropdown">
+                                                    <button class="dropdown-dots dropdown-toggle delete-drop" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
+                                                    
+                                                    </button>
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li><a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                   
                                  </div></span>`;
             $('#_section_items_continer').append(add_more_item)
         })  
@@ -1786,7 +1795,16 @@
             var add_more_item = `<span>
                                  <input type="text" class="form-control iteminput-modified" name="item_option[]" placeholder="Option Title">
                                  <div class="editdelicons">
-                                    <a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a>
+                                 <div class="dropdown">
+                                                    <button class="dropdown-dots dropdown-toggle delete-drop" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
+                                                    
+                                                    </button>
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li> <a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                   
                                  </div></span>`;
             $('#item_option_container').append(add_more_item);
         })  
