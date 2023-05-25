@@ -50,7 +50,7 @@ class Tag extends Model
             tag.name,
             tag.company_id,
             tag.has_qty,
-            tag.created_at,           
+            tag.created_at,
             c1.name AS c1_name,
             c2.name AS c2_name"
         );
@@ -66,8 +66,8 @@ class Tag extends Model
         if (!empty($param['keyword'])) {
             $keyword = $param['keyword'];
             $query->whereRaw("(
-            `c2`.`name` LIKE '%$keyword%' 
-            OR `c1`.`name` LIKE '%$keyword%'             
+            `c2`.`name` LIKE '%$keyword%'
+            OR `c1`.`name` LIKE '%$keyword%'
             OR tag.name LIKE '%$keyword%')");
         }
 
@@ -96,8 +96,8 @@ class Tag extends Model
 
         if (!empty($output['keyword'])) {
             $keyword = $output['keyword'];
-            $query->whereRaw("(             
-            `c1`.`name` LIKE '%$keyword%'             
+            $query->whereRaw("(
+            `c1`.`name` LIKE '%$keyword%'
             OR tag.name LIKE '%$keyword%')");
         }
 
@@ -136,8 +136,8 @@ class Tag extends Model
 
         if (!empty($output['keyword'])) {
             $keyword = $output['keyword'];
-            $query->whereRaw("(             
-            `c1`.`name` LIKE '%$keyword%'             
+            $query->whereRaw("(
+            `c1`.`name` LIKE '%$keyword%'
             OR tag.name LIKE '%$keyword%')");
         }
 
@@ -238,7 +238,7 @@ class Tag extends Model
             'tag.is_required',
 //                'tag.price',
 //                'tag.spec_type',
-//                'tag.build_spec',
+//                'tag.build_spec',bhgz.xs.xdx,
             'tag.hover_field_type_id',
             'tag.hover_field_id',
             'hft.slug AS field_type_slug',

@@ -136,7 +136,7 @@
                                     <li>Save</li>
                                 </ul>
                             </button>
-                            <button type="button" class="btn btn-close cancelButton">
+                            <button type="button" id="cancelBtn" class="btn btn-close cancelButton">
                                 <ul class="add-cancel-btn">
                                     <li>-</li>
                                     <li> Cancel</li>
@@ -172,7 +172,7 @@
             </div>
             <div class="modal-footer footer-close-button">
                 <div class="add-cancel-bnt">
-                    <button type="button" class="btn btn-save bg-modified" data-dismiss="modal">
+                    <button type="button" onclick="window.location='{{ url("subadmin/questionnaire") }}'" class="btn btn-save bg-modified">
                         <ul class="add-cancel-btn">
                             <li>×</li>
                             <li>Close</li>
@@ -482,7 +482,9 @@
 @endsection
 @push('page_level_scripts')
 <script type="text/javascript">
-
+$("#cancelBtn").click(function () {
+        window.location.href = "{{url('/subadmin/questionnaire')}}";
+    });
     +function ($) {
         'use strict';
 

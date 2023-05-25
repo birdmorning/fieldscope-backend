@@ -33,6 +33,7 @@
                         <div class="col-md-12">
                             <div class="card-title">
                                 <h1 class="main-heading">Projects</h1>
+                                <div class="buttons">
                                 <button type="button" class="add-btn" data-toggle="modal" data-target="#myModal">
                                     <ul class="d-flex align-items-center">
                                         <li>
@@ -44,7 +45,9 @@
                                     </ul>
 
                                 </button>
+                               
                             </div>
+                            
                         </div>
                     </div>
 
@@ -65,8 +68,8 @@
                             </button>
                                 <a href="http://127.0.0.1:8000/subadmin/crm/sync" class="btn-green-new">JobScope Sync </a>
                             </div>
-                            <div class="data-tables-select" >
-                                <label>
+                            <div class="data-tables-select">
+                                <!-- <label style="left: 2px;padding: 0 0 6px 0;">
                                     Show
                                         <select name="example_length" aria-controls="example" class="form-control input-sm">
                                             <option value="10">10</option><option value="20">20</option>
@@ -74,265 +77,22 @@
                                             <option value="200">200</option>
                                         </select>
                                     entries
-                                </label>
+                                </label> -->
                             </div>
+                            <div class="search-input">
+                                <input value="" id="search-input" name="keyword" type="text" class="form-control" placeholder="Search Projects">
+                                
+                            </div>
+                         
                         </div>
-                    </div>
+                        
 
+                    
                     <div class="row new-card-row" id="project_grid">
 
-<div style="display: none;">
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li>
-                        <a href="{{URL::to('subadmin/project/edit-project',['id'=>1])}}"><i
-                                    class="fa fa-pen pl-1"></i></a>
-                    </li>
-                </ul>
-                <ul>
 
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img
-                                        src="{{asset('assets/images/calender-icon.png')}}"
-                                        alt="...">
-                                <p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li><i class="fa fa-pen pl-1" title="Edit Project"></i></li>
-                </ul>
-                <ul >
-
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li><i class="fa fa-pen pl-1" title="Edit Project"></i></li>
-                </ul>
-                <ul >
-
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li><i class="fa fa-pen pl-1" title="Edit Project"></i></li>
-                </ul>
-                <ul >
-
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li><i class="fa fa-pen pl-1" title="Edit Project"></i></li>
-                </ul>
-                <ul >
-
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-body">
-            <div class="card-header">
-                <ul class="new-card address-icon">
-                    <li><h1>Kelly Lewis</h1></li>
-                    <li><i class="fa fa-pen pl-1" title="Edit Project"></i></li>
-                </ul>
-                <ul >
-
-                    <li>
-                        <ul class="address-icon">
-                            <li><p>16433 Agnes St Gardner, KS 66030</p></li>
-                            <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-img">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-            </div>
-            <div class="card-footer">
-                <ul>
-                    <li><span>Assigned To</span></li>
-                    <li><p>Paul Lewis</p></li>
-                </ul>
-                <ul>
-                    <li><span>Inspection Date</span></li>
-                    <li><p>10/06/2021</p></li>
-                </ul>
-                <ul>
-                    <li><span>Claim #</span></li>
-                    <li><p>1234567890</p></li>
-                </ul>
-                <ul>
-                    <li><span>Email</span></li>
-                    <li><p>kelly@test12.com</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12" id="project_page_controls"></div>
-                    </div>
+            </div>
                 </div>
         <!-- New Work  End -->
 
@@ -373,7 +133,7 @@
                         </div>
                     </div>
                 </div> -->
-            </div>  
+            </div>
 
         </div>
     </div>
@@ -381,30 +141,9 @@
 
 
 {{--    Grid     --}}
-<div class="content container hide">
+
     <div class="row nomargin pm-maincon-modified" id="__project_grid">
 
-        <div class="col-md-3 pm-col-modified">
-            <div class="thumbnail pm-thumbnail-modified">
-                <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                <div class="caption pm-caption-modified">
-                    <div class="pm-captionheader-modified">
-                        <h3>PROJECT NAME</h3>
-                        <a >Open</a>
-                        <a class="num-modified">20</a>
-                    </div>
-                    <p>16433 Agnes St Gardner, KS 66030</p>
-                    <div class="pm-caption-bottom">
-                        <div>
-                            <p >Inspector:<span>Paul Lewis</span></p>
-                        </div>
-                        <div>
-                            <p >Submitted Date:<span>10/06/2021</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row nomargin pm-maincon-modified" >
         <div class="col-md-12 col-sm-12 col-xs-12" id="project_page_controls"></div>
@@ -412,27 +151,6 @@
 
         <div class="col-md-3 pm-col-modified hide">
             <div class="thumbnail pm-thumbnail-modified">
-                <img src="{{asset('assets/images/pm-mapimg.jpg')}}" alt="...">
-                <div class="caption pm-caption-modified">
-                    <div class="pm-captionheader-modified">
-                        <h3>PROJECT NAME</h3>
-                        <a >Open</a>
-                        <a class="num-modified">20</a>
-                    </div>
-                    <p>16433 Agnes St Gardner, KS 66030</p>
-                    <div class="pm-caption-bottom">
-                        <div>
-                            <p >Inspector:<span>Paul Lewis</span></p>
-                        </div>
-                        <div>
-                            <p >Submitted Date:<span>10/06/2021</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 pm-col-modified hide">
-            <div class="thumbnail pm-thumbnail-modified">
                 <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
                 <div class="caption pm-caption-modified">
                     <div class="pm-captionheader-modified">
@@ -495,7 +213,6 @@
             </div>
         </div>
     </div>
-
 <div class="row nomargin hide">
   <div class="col-md-12 col-sm-12 col-xs-12">
      <table class="table table-striped" id="example">
@@ -539,9 +256,15 @@
                         </div>
                         <div class="col-md-12 companyinfobody rm-companyinfobody-modified address-group">
                             <!-- <label>Address Lane 1</label> -->
-                            <input name="address1" id="add_address1" type="text"  placeholder="Address" autocomplete="off">
+                            <input name="address1" id="add_address1" type="text"  placeholder="Address 1" autocomplete="off">
                             <input name="lat" type="hidden" >
                             <input name="long" type="hidden" >
+                        </div>
+
+                        <div class="col-md-12 companyinfobody rm-companyinfobody-modified address-group">
+                            <!-- <label>Address Lane 1</label> -->
+                            <input name="address2" id="add_address2" type="text"  placeholder="Address 2" autocomplete="off">
+
                         </div>
 
                         <div class="col-md-12 companyinfobody rm-companyinfobody-modified">
@@ -560,7 +283,7 @@
 
                         <div class="col-md-12 companyinfobody rm-companyinfobody-modified">
                             <!-- <label>Sales Tax aaaa</label> -->
-                            <input  type="text" class="input date-picker" placeholder="Inspection Date">
+                            <input name="inspection_date"  class="input disableFuturedate"  placeholder="Date" type ="date">
                         </div>
 
                         <div class="col-md-12 companyinfobody rm-companyinfobody-modified">
@@ -651,12 +374,12 @@
 
                 </div>
                 <div class="modal-footer logoimagefooter">
-                    <!-- <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
                         Cancel
                     </button>
                     <button type="submit" class="btn btn-save bg-modified filter_submit">Confirm
-                    </button> -->
-                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                    </button>
+                    <!-- <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
                         <ul class="add-cancel-btn">
                             <li>-</li>
                             <li> Cancel</li>
@@ -667,7 +390,7 @@
                             <li>+</li>
                             <li>Save</li>
                         </ul>
-                    </button>
+                    </button> -->
                 </div>
             </form>
 
@@ -695,13 +418,16 @@
                         <input name="name" type="text"  placeholder="Project Name">
                     </div>
                     <div class="col-md-12 companyinfobody rm-companyinfobody-modified form-group">
-                        <input name="address1" id="update_address1" type="text" placeholder="Address" autocomplete="off">
+                        <input name="address1" id="update_address1" type="text" placeholder="Address 1" autocomplete="off">
                         <input name="lat" type="hidden" >
                         <input name="long" type="hidden" >
                     </div>
+                    <div class="col-md-12 companyinfobody rm-companyinfobody-modified form-group">
+                        <input name="address2" id="update_address2" type="text" placeholder="Address 2" autocomplete="off">
 
+                    </div>
                     <div class="col-md-6 companyinfobody rm-companyinfobody-modified">
-                        <input name="customer_email" type="text" class="input" placeholder="Customer Email">
+                        <input name="customer_email" readonly type="text" class="input" placeholder="Customer Email">
                     </div>
 
                     <div class="col-md-6 companyinfobody rm-companyinfobody-modified">
@@ -755,7 +481,7 @@
 
     <script type="text/javascript">
 
-        $(".date-picker").datepicker();
+
 
         function initAutocomplete(){
             let addressInput = $('input[name="address1"]');
@@ -763,9 +489,7 @@
                 types: ["geocode"],
                 /** street_address: indicates a precise street address,
                  * address: from table 3 */
-                componentRestrictions: {
-                    country: ["us","pk"]
-                },
+               
                 fields: ["name","address_components", "geometry"],
             };
 
@@ -864,19 +588,6 @@
                 renderGrid();
             });
 
-            $('input[name="inspection_date"]').on('focusout', function () {
-                var d = new Date();
-                var month = d.getMonth() + 1;
-                var day = d.getDate();
-                var output = d.getFullYear() + '-' +
-                    (('' + month).length < 2 ? '0' : '') + month + '-' +
-                    (('' + day).length < 2 ? '0' : '') + day;
-
-                if (output > $(this).val()) {
-                    $(this).val('');
-                    alert("Inspection date can't be earlier than " + output);
-                }
-            });
 
             var selectedCItyId = '';
 
@@ -1019,7 +730,7 @@
 
                         $('#update_form input[name="name"]').val(response.data.name);
                         $('#update_form input[name="address1"]').val(response.data.address1);
-                        // $('#update_form input[name="address2"]').val(response.data.address2);
+                        $('#update_form input[name="address2"]').val(response.data.address2);
                         // $('#update_form input[name="postal_code"]').val(response.data.postal_code);
                         $('#update_form input[name="claim_num"]').val(response.data.claim_num);
                         $('#update_form input[name="customer_email"]').val(response.data.customer_email);
@@ -1091,7 +802,7 @@
                 // console.log($(document).find("select,textarea, input").serialize());
                 $('#project_page_controls').pagination({
                     dataSource: '{!! URL::to("subadmin/project_datatable") !!}',
-                    pageSize: 8,
+                    pageSize: 9,
                     locator: "records",
                     autoHidePrevious: true,
                     autoHideNext: true,
@@ -1134,8 +845,9 @@
             function template(params) {
                 let grid = "";
                 params.forEach((element,index) => {
-
                     let substr =element.address1.length > 35 ? element.address1.substring(0, 35)+' ...' : element.address1;
+                   let subassigned_user = element.assigned_user.length > 30 ? element.assigned_user.substr(0, 30) + '...' : element.assigned_user;
+                   // let subemail = element.customer_email.length > 30 ? element.customer_email.substr(0, 30) + '...' : element.customer_email;
                     // "http://127.0.0.1:8000/uploads/media/1631144783457-1631145186-106830256.jpg"
 
                     // assets/images/pm-cardimg.png
@@ -1206,12 +918,14 @@
                                         <ul>
                                             <li>
                                                 <ul class="address-icon">
-                                                    <li><p data-toggle="tooltip"
-                                                           title="${element.address1}">${substr}</p></li>
-                                                    <li class="address-icon"><img
+                                                <li><p data-toggle="tooltip"
+                                                    title="${element.address1}">${substr}</p></li>
+                                                </ul>
+                                                <ul class="address-icon">
+                                                <li class="address-icon"><img
                                                                 src="{{asset('assets/images/calender-icon.png')}}"
                                                                 alt="...">
-                                                        <p>${moment(element.created_at).fromNow()}, <span>${moment(element.created_at).format('hh:mm A')}</span></p></li>
+                                                <p>${moment(element.created_at).fromNow()}, <span>${moment(element.created_at).format('hh:mm A')}</span></p></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -1219,22 +933,26 @@
                                     <div class="card-img">
                                         <img src="${element.thumb}" alt="${element.name} Thumbnail">
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer" style="right: 2px;padding: 0 0 6px 0;">
                                         <ul>
-                                            <li><span>Assigned To</span></li>
-                                            <li><p>${element.assigned_user}</p></li>
+                                            <li class="address-icon"><span>Assigned To</span></li>
+                                            <li><p>${subassigned_user}</p></li>
                                         </ul>
-                                        <ul>
-                                            <li><span>Inspection Date</span></li>
-                                            <li><p>${moment(element.inspection_date).format("MM/DD/YYYY")}</p></li>
-                                        </ul>
-                                        <ul>
+                                        <ul style="text-align: right;">
                                             <li><span>Claim #</span></li>
                                             <li><p>${element.claim_num}</p></li>
                                         </ul>
-                                        <ul>
-                                            <li><span>Email</span></li>
+                                       
+                                    </div>
+                                    <div class="card-footer" style="left: 2px;padding: 0;">
+                                    <ul>
+                                            <li class="address-icon"><span>Email</span></li>
                                             <li><p>${element.customer_email}</p></li>
+                                        </ul>
+                                
+                                        <ul style="text-align: right;">
+                                            <li><span>Inspection Date</span></li>
+                                            <li><p>${moment(element.inspection_date).format("MM/DD/YYYY")}</p></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1263,7 +981,24 @@
             }
 
         });
+
+        $(document).ready(function () {
+            var currentDate = new Date();
+            $('.disableFuturedate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose:true,
+            startDate: "currentDate",
+            minDate: currentDate
+            }).on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+            });
+            $('.disableFuturedate').keyup(function () {
+            if (this.value.match(/[^0-9]/g)) {
+                this.value = this.value.replace(/[^0-9^-]/g, '');
+            }
+            });
+        });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACES_KEY')}}&libraries=places&callback=initAutocomplete&v=3.50" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlUlyus8U80FZOXPzVHEeVEYHcJHsOrjU&libraries=places&callback=initAutocomplete&v=3.50" async defer></script>
 @endpush
 

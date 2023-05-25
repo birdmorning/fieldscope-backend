@@ -13,25 +13,26 @@
 					</div>
 				<!-- </a> -->
 			</div>
-			<div class="search-input">
-				<input type="text" name="search" id="search" placeholder="Search Projects" />
+			<!-- <div class="search-input">
+			<input value="" id="search-input" name="keyword" type="text" class="form-control" placeholder="Search Projects">
+			
 				<img src="{{asset('image/search-icon.png')}}" class="img-responsive"/>
-			</div>
+			</div> -->
 			<ul class="nav navbar-nav navbar-modified ms-auto navigation " >
 				<li>
-					<a class="active-nav" href="{{ URL::to('subadmin/project') }}" >Projects</a>
+					<a class="@if(request()->is('subadmin/project')) active-nav @endif" href="{{ URL::to('subadmin/project') }}" >Projects</a>
 				</li>
 				<li>
-					<a href="{{ URL::to('subadmin/photo_feed') }}">Photo Feed</a>
+					<a class="@if(request()->is('subadmin/photo_feed')) active-nav @endif" href="{{ URL::to('subadmin/photo_feed') }}">Photo Feed</a>
 				</li>
 				<li class="dropdown">
-					<a href="#">Admin</a>
+					<a class="@if(request()->is('subadmin','subadmin/inspect_user','subadmin/user-type','subadmin/inspect_area','subadmin/photo_view','subadmin/require_photo','subadmin/cat_tag','subadmin/tag','subadmin/report','subadmin/questionnaire','subadmin/subscription','subadmin/settings')) active-nav @endif" href="#">Admin</a>
 					<ul class="dropdown-content">
 						<li>
 							<a href="{{ URL::to('subadmin') }}">User Types</a>
 						</li>
 						<li>
-							<a href="{{ URL::to('subadmin/inspect_user') }}">User Managment</a>
+							<a href="{{ URL::to('subadmin/inspect_user') }}">User Management</a>
 						</li>
 						<li>
 							<a href="{{ URL::to('subadmin/inspect_area') }}">Inspection Areas</a>
@@ -58,7 +59,7 @@
 							<a href="{{ URL::to('subadmin/subscription') }}">Subscription Management</a>
 						</li>
 						<li>
-							<a href="{{URL::to('subadmin/settings')}}">User Setting</a>
+							<a href="{{URL::to('subadmin/settings')}}">User Settings</a>
 						</li>
 					</ul>
 				</li>

@@ -24,6 +24,14 @@
             height:150px;
             border-radius:5px;
         }
+        #project_page_controls {
+    padding-left: 41px;
+    padding-bottom: 50px !important;
+}
+#project_page_controls {
+    padding-left: 14px !important;
+    padding-bottom: 60px !important;
+}
 
     </style>
 
@@ -33,10 +41,7 @@
                         <div class="col-md-12">
                                 <div class="card-title-photo-feed">
                                     <h1 >Photo Feed</h1>
-                                    <ol class="breadcrumb">
-                                        <li><a href="#" class="active">Pre-Inspection Photos</a></li>
-                                        <li><a href="#"> Front Elevation</a></li>
-                                    </ol>
+                                    
                                 </div>
                             </div>
                     </div>
@@ -44,7 +49,7 @@
                         <div class="col-md-12 d-flex align-items-center justify-content-between">
                                 <!-- Trigger the modal with a button -->
                                     <div class="top-button">
-                                        <button class="filter-btn" data-toggle="modal" data-target="#myModalFilter">
+                                        <button class="btn btn-add pf-btn-cf-modified" data-toggle="modal" data-target="#myModal">
                                             <ul class="d-flex align-items-center">
                                                 <li>
                                                         <img src="{{asset('assets/images/filter-icon.png')}}" alt="...">
@@ -54,7 +59,8 @@
                                                 </li>
                                             </ul>
                                          </button>
-                                         <a  class="btn-green-new">Clear Filter </a>
+                                         
+                                    <a href="{{URL::to('subadmin/photo_feed')}}" class="btn btn-add pf-btn-cf-modified"> Clear Filter</a>
                                     </div>
                                     <div class="data-tables-select" >
                                         <label>
@@ -69,449 +75,17 @@
                                     </div>
                             
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 ">
-                            <div class="card-body">
-                                    <div class="card-header">
-                                            <ul class="new-card address-icon">
-                                                <li><h1>Kelly Lewis</h1></li>
-                                                <li class="address-icon"><img src="{{asset('assets/images/calender-icon.png')}}" alt="..."><p>2 months ago, <span>06:00pm</span></p></li>
-                                            </ul>
-                                           
-                                    </div>
-                                    <div class="card-img">
-                                        <img src="{{asset('assets/images/pm-cardimg.png')}}" alt="...">
-                                    </div>
-                                    <div class="card-footer-photo-feed">
-                                            <div class="footer-top">
-                                                <ul>
-                                                    <li><span>Photo Tag : </span></li>
-                                                    <li><p> Front Elevation</p></li>
-                                                </ul>
-                                                <ul>
-                                                    <li><span>Claim Number : </span></li>
-                                                    <li><p> 10001</p></li>
-                                                </ul>
-                                            </div>
-                                            <ul>
-                                                <li><span>Qty : </span></li>
-                                                <li><p> 10</p></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>Annotation : </span></li>
-                                                <li><p> This is just a test note.</p></li>
-                                            </ul>  
-                                    </div>
-                                         
-                                            
-                            </div>
-                        </div>
                        
                     </div>
                 </div>
         <!-- New Work  End -->
     <div class="row">
         <div class="col-md-6">
-            <h1 class="main-heading">Photo Feed </h1>
+            <!-- <h1 class="main-heading">Photo Feed </h1> -->
         </div>
 
         <div class="col-md-6">
-            <div class="container">
+            <!-- <div class="container">
                 <div class="row" >
                     <div class="col-md-12" >
                         <button class="btn btn-add pf-btn-cf-modified" data-toggle="modal" data-target="#myModal"><i class="fa fa-filter pl-1"></i> filter</button>
@@ -529,7 +103,7 @@
                         </div>
                     </div>
                     
-                </div>
+                </div> -->
                     
                 <!-- Trigger the modal with a button -->
                 {{--<button type="button" class="btn btn-add" >Add Project </button>--}}
@@ -626,19 +200,35 @@
 
         @if(!empty($data['latest_photos']->total()))
             @foreach($data['latest_photos'] AS $key => $item)
-                    <div class="col-md-3  card-col-modified">
-                        <a href="{{url('subadmin/photo_feed/edit/'.$item->id)}}">
-                            <div class="card-image card-image-modified">
-                                <img src="{{url('uploads/media/'.$item->path."?".$item->updated_at )}}" class="img-responsive"/>
-                            </div>
-                            <div class="card-details card-details-modified" style="min-height:80px">
-                                <h4>{{$item->p_name}}</h4>
-                                <h5 class="light-gray"
+                             <div class="col-md-4">
+                                <div class="card-body">
+                                    <div class="card-header">
+                                        <ul class="new-card address-icon">
+                                            <li>
+                                                <!-- <a href="${baseUrl+"/subadmin/project/detail/"+element.id}"></a> -->
+                                                <h4>{{$item->p_name}}</h4>
+                                            </li>
+                                            <li>
+                                            <a href="{{url('subadmin/photo_feed/edit/'.$item->id)}}"><i
+                                                            class="fa fa-pen pl-1"></i></a>
+                                                <a href="{{url('subadmin/photo_feed/details/'.$item->id)}}"><i
+                                                            class="fa fa-eye pl-1"></i></a>
+                                            </li>
+                                        </ul>
+                                       
+                                    </div>
+                                    <div class="card-img">
+                                    <img src="{{url('uploads/media/'.$item->path)}}"  class="img-responsive"/>
+                                    </div>
+                                  
+                                    <div class="card-footer" style="left: 2px;padding: 0;">
+                                    <h5 class="light-gray"
                                     title="{{\Carbon\Carbon::parse($item->created_at)->format('Y-m-d g:i A') }}">{{\Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
                                     . {{$item->u_first_name}} {{$item->u_last_name}}</h5>
+                                    </div>
+
+                                </div>
                             </div>
-                        </a>
-                    </div>
                 
             @endforeach
         @else
@@ -647,14 +237,12 @@
         </div>
         @endif
 
-
-</div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-sm-12 col-xs-12" id="project_page_controls">
         {{$data['latest_photos']->appends(request()->input())->links()}}
     </div>
 </div>
-
+</div>
 
 <div class="modal fade" id="editModal" role="dialog">
     <div class="modal-dialog modal-sm">
@@ -812,7 +400,7 @@
                 "processing": true,
                 "serverSide": true,
                 "ordering": false,
-                "autoWidth": false,
+                "autoWidth": true,
                 searching: false,
                 rowId: 'id',
                 "createdRow": function (row, data, dataIndex) {

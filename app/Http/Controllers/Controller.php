@@ -260,9 +260,9 @@ class Controller extends BaseController
         }
         $destinationPath = ($is_public_path)? public_path($image_path) : storage_path($image_path);
 
-        if(!is_dir($destinationPath)){
-            mkdir($destinationPath);
-        }
+        // if(!is_dir($destinationPath)){
+        //     mkdir($destinationPath);
+        // }
         $imagePath = $destinationPath. $name;
 
         $obj_image->move($destinationPath, $name);
@@ -421,7 +421,7 @@ class Controller extends BaseController
             $htmlbody = $message;
 
             $message = "--PHP-mixed-$random_hash\r\n"."Content-Type: multipart/alternative; boundary=PHP-alt-$random_hash\r\n\r\n";
-            $message .= "--PHP-alt-$random_hash\r\n"."Content-Type: text/html; 
+            $message .= "--PHP-alt-$random_hash\r\n"."Content-Type: text/html;
           charset=\"".$charset."\"\r\n"."Content-Transfer-Encoding: 7bit\r\n\r\n";
 
 
@@ -457,8 +457,8 @@ class Controller extends BaseController
     public function isArray($string)
     {
         if(is_array($string)){
-            return $string['value'];        
-        }        
+            return $string['value'];
+        }
         return $string;
     }
 

@@ -18,7 +18,27 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
             color: white;
         }
-      
+        .company-intoduction-modal .modal-body .modal-table table .dropdown-menu {
+        left: 300px;
+        background-color: #f7f7f7;
+        }
+    .dropdown-menu {
+    box-shadow: none;
+    display: none;
+    float: left;
+    font-size: 12px;
+    left: 0;
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    text-shadow: none;
+    top: 100%;
+    z-index: 9998;
+    border: 1px solid #D9DEE4;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    width: 100px;
+    }
       #main_primary,#main_secondary {
         height: 170px;
         width: 300px;
@@ -461,7 +481,7 @@
                                 <button type="submit" class="btn btn-save bg-modified">
                                     <ul class="add-cancel-btn">
                                         <li>+</li>
-                                        <li>Save</li>
+                                        <li>Confirm</li>
                                     </ul>
                                 </button>
                         </div>
@@ -545,7 +565,7 @@
                           <button type="submit" class="btn btn-save bg-modified">
                                 <ul class="add-cancel-btn">
                                         <li>+</li>
-                                        <li>Save</li>
+                                        <li>Confirm</li>
                                     </ul>
                             </button>
                     </div>
@@ -636,7 +656,7 @@
                         <div class="form-group cover_image pen-cover-img @if(!empty($report->report_cover_image)) {{"hide"}} @endif">
                            
                             <div class="form-group setting-from-group">
-                                    <label for="file">choose a file</label>
+                                    <label for="file">Cover Image</label>
                                         <input id="file" class="form-control input-filke" type="file" placeholder="Cover Image" name="cover_image" />
                                     </div>
 {{--                            <img src="{{asset('assets/images/edit-pen-img.png')}}" alt="...">--}}
@@ -675,7 +695,7 @@
                             <button type="submit" class="btn btn-save bg-modified">
                                 <ul class="add-cancel-btn">
                                     <li>+</li>
-                                    <li>Save</li>
+                                    <li>Confirm</li>
                                 </ul>
                             </button>
                     </div>
@@ -711,8 +731,18 @@
                     </div>
                 </div>
                 <div class="modal-footer logoimagefooter">
-                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-save bg-modified">Confirm</button>
+                    <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                    <ul class="add-cancel-btn">
+                                        <li>-</li>
+                                        <li> Cancel</li>
+                                    </ul>
+                        </button>
+                    <button type="submit" class="btn btn-save bg-modified">
+                                    <ul class="add-cancel-btn">
+                                        <li>+</li>
+                                        <li>Confirm</li>
+                                    </ul>
+                                </button>
                 </div>
             </div>
         </form>
@@ -788,7 +818,7 @@
                             <button type="submit" class="btn btn-save bg-modified">
                                 <ul class="add-cancel-btn">
                                     <li>+</li>
-                                    <li>Save</li>
+                                    <li>Confirm</li>
                                 </ul>
                             </button>
                     </div>
@@ -873,8 +903,8 @@
                                                     <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
                                                     
                                                     </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a href="# " class="delete"><img src="{{asset('image/trash.png')}}" alt="..."></
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li><a href="# " style="text-align: center;" class="delIcon delete_section_item"><img src="{{asset('image/trash.png')}}" alt="...">
                                                         </ul>
                                                     </div>
                                             </div>
@@ -888,8 +918,8 @@
                                                     <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
                                                     
                                                     </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a href="# " class="delete"><img src="{{asset('image/trash.png')}}" alt="..."></
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li><a href="# " style="text-align: center;" class="delIcon delete_section_item"><img src="{{asset('image/trash.png')}}" alt="...">
                                                         </ul>
                                                     </div>
                                             </div>
@@ -904,8 +934,8 @@
                                                     <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
                                                     
                                                     </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a href="# " class="delete"><img src="{{asset('image/trash.png')}}" alt="..."></
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li><a href="# " style="text-align: center;" class="delIcon delete_section_item"><img src="{{asset('image/trash.png')}}" alt="...">
                                                         </ul>
                                                     </div>
                                             </div>
@@ -919,8 +949,8 @@
                                                     <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
                                                     
                                                     </button>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                            <li><a href="# " class="delete"><img src="{{asset('image/trash.png')}}" alt="..."></
+                                                        <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
+                                                            <li><a href="#" style="text-align: center;" class="delIcon delete_section_item"><img src="{{asset('image/trash.png')}}" alt="...">
                                                         </ul>
                                                     </div>
                                             </div>
@@ -931,8 +961,17 @@
                         </div>
                     </div>
                     <div class="modal-footer logoimagefooter">
-                        <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-save bg-modified ">Confirm</button>
+                        <button type="button" class="btn btn-close cancelButton" data-dismiss="modal">
+                                <ul class="add-cancel-btn">
+                                        <li>-</li>
+                                        <li> Cancel</li>
+                                    </ul></button>
+                        <button type="submit" class="btn btn-save bg-modified ">
+                        <ul class="add-cancel-btn">
+                                        <li>+</li>
+                                        <li>Confirm</li>
+                                    </ul>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -956,9 +995,9 @@
                 <div class="modal-body  uploadpdffilemodalbody company-intoduction-modal">
 
                     <div class="row">
-                        <div class="col-md-12 rm-companyinfobody-modified">
+                        <!-- <div class="col-md-12 rm-companyinfobody-modified">
                             <input value="{{ !empty($introductions->title) ? $introductions->title : null }}"  type="text" class="form-control" id="intro_title" name="title" placeholder="Title" />
-                        </div>
+                        </div> -->
 <!--                         <div class="form-group col-md-2 text-right">
                             <button type="button" class="btn add_new " style="background-color: #00ADE7; color: white" >Add New</button>
                         </div> -->
@@ -979,7 +1018,7 @@
                             <tr class="table-body">
                                 <td  class="left first-cell">{{$item->title}}</td>
                                 <td class="right">
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown">
                                     <button class="dropdown-dots dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <img src="{{asset('assets/images/dropdown-dots.png')}}" alt="...">
                                     </button>
@@ -987,7 +1026,7 @@
                                         <li><a href="#"  data-id="{{$item->id}}" class="edit_intro"><img src="{{asset('image/edit.png')}}" alt="..."></a></li>
                                         <li><a href="#" data-id="{{$item->id}}" class="delete_intro"><img src="{{asset('image/trash.png')}}" alt="..."></a></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 </td>
                             </tr>
                         @endforeach
@@ -1006,7 +1045,7 @@
                        <button type="submit" class="btn btn-save bg-modified">
                             <ul class="add-cancel-btn">
                                <li>+</li>
-                               <li>Save</li>
+                               <li>Confirm</li>
                             </ul>
                         </button>
                     </div>
@@ -1079,7 +1118,7 @@
                         <button type="submit" class="btn btn-save bg-modified">
                                 <ul class="add-cancel-btn">
                                         <li>+</li>
-                                        <li>Save</li>
+                                        <li>Confirm</li>
                                 </ul>
                         </button>
                     </div>
@@ -1139,7 +1178,7 @@
                                 <button type="submit" class="btn btn-save bg-modified">
                                     <ul class="add-cancel-btn">
                                         <li>+</li>
-                                        <li>Save</li>
+                                        <li>Confirm</li>
                                     </ul>
                                 </button>
                         </div>
@@ -1779,7 +1818,7 @@
                                                     
                                                     </button>
                                                         <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
-                                                            <li><a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></li>
+                                                            <li><a class="delIcon delete_section_item" href="javascript:void(0)"><img src="{{asset('image/trash.png')}}" alt="..."></a></li>
                                                         </ul>
                                                     </div>
                                    
@@ -1788,7 +1827,7 @@
         })  
         
         $(document).on( 'click', '.delete_section_item', function(){
-            $(this).parent().parent().remove();
+            $(this).parent().parent().parent().parent().parent().remove();
         })  
         
         $('#add_more_item_option').click( function(){
@@ -1801,7 +1840,7 @@
                                                     
                                                     </button>
                                                         <ul class="dropdown-menu drop-delte" aria-labelledby="dropdownMenu1">
-                                                            <li> <a class="delIcon delete_section_item" href="javascript:void(0)"><i class="far fa-trash-alt"></i></a></li>
+                                                            <li> <a class="delIcon delete_section_item" href="javascript:void(0)"><img src="{{asset('image/trash.png')}}" alt="..."></a></li>
                                                         </ul>
                                                     </div>
                                    

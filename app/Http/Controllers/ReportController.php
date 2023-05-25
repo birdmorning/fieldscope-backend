@@ -181,6 +181,37 @@ class ReportController extends Controller
 
     public function createReport(Request $request, $projectId)
     {
+        if(isset($request->request_options['owner_authorization']['section_items']) && isset($request->request_options['owner_authorization']['item_options'])) {
+            $items = [];
+            $qty = [];
+            $price = [];
+            $total = [];
+            $item_options = [];
+            foreach($request->request_options['owner_authorization']['section_items'] as $selectd_items) {
+                array_push($items,$selectd_items['name']);
+                $getqty = (string)number_format($selectd_items['qty']);
+                $getprice = (string)number_format($selectd_items['price'], 2, '.', '');
+                $gettotal = (string)number_format($selectd_items['total'], 2, '.', '');
+                array_push($qty,$getqty);
+                array_push($price,$getprice);
+                array_push($total,$gettotal);
+            }
+            foreach($request->request_options['owner_authorization']['item_options'] as $item_option) {
+                array_push($item_options,$item_option['name']);
+            }
+
+            $new_data= (object)[];
+            $new_data->section_item = (object)[];
+            $new_data->section_item->item = $items;
+            $new_data->section_item->qty = $qty;
+            $new_data->section_item->price = $price;
+            $new_data->section_item->total = $total;
+            $new_data->item_option = $item_options;
+            $new_data = json_encode($new_data);
+            $crdata = CompanyReport::where(['company_id' => $request['company_id']])->first();
+            $crdata->json_data = $new_data;
+            $crdata->save();
+        }
 
         $this->report = Report::firstOrNew(['project_id' => $projectId]);
 
@@ -198,7 +229,7 @@ class ReportController extends Controller
             $request['user-token'] = "670b4fa5948639577b80812b6d46b953";
             $this->optionsRequest = json_decode($this->optionsRequest, true);
             // $this->optionsRequest = $options;
-            $user = User::where(['token' => $request['user-token']])->first();
+            $user = User::where(['token' => $request->header('user-token')])->first();
         } else {
             $user = User::where(['id' => $request['user_id']])->first();
             $this->optionsRequest = $request['request_options'];
@@ -401,7 +432,25 @@ class ReportController extends Controller
             'userDetails' => $this->userDetails, 'projectDetails' => $this->projectDetails ]);
         $this->mpdf->WriteHTML($cover);
 //        return $this->output();
+        $this->ownerAuthorization();
+        // $this->mpdf->SetHTMLHeader(view('reports/v2/header', ['project' => $this->projectDetails,'companyDetails' => $this->companyDetails ])->render());
+        // $this->mpdf->AddPage(
+        //     '', // L - landscape, P - portrait
+        //     '', // E-even|O-odd|even|odd|next-odd|next-even
+        //     '', '', '',
+        //     15, // margin_left
+        //     15, // margin right
+        //     40, // margin top
+        //     60, // margin bottom
+        //     0, // margin header
+        //     0);
+        // $this->mpdf->SetHTMLFooter(view('reports/v2/footer', ['project' => $this->projectDetails,'companyDetails' => $this->companyDetails])->render());
 
+        // $this->mpdf->WriteHTML(
+        //     view("reports/v2/owner_authorization",
+        //         ['companyDetails' => $this->companyDetails ]
+        //     )->render()
+        // );
         //</editor-fold>
 
         $this->companyIntroduction();
@@ -664,6 +713,7 @@ class ReportController extends Controller
                 } /** Additional Photos End*/
 
                 if(count(((array) $project['categories']))  == $typeCount){
+                    // dd(2);
                     $this->mpdf->WriteHTML('<pagebreak />');
                 }
                 $typeCount++;
@@ -743,7 +793,8 @@ class ReportController extends Controller
 //        return $this->output();
     }
 
-    /** Isn't getting used anywhere so commenting so to be retired closed in date  25 feb 22
+    // /** Isn't getting used anywhere so commenting so to be retired closed in date  25 feb 22
+    //  *
      public function ownerAuthorization(){
         $this->mpdf->SetHTMLHeader(view('reports/v2/header', ['project' => $this->projectDetails,'companyDetails' => $this->companyDetails ])->render());
         $this->mpdf->AddPage(
@@ -757,13 +808,13 @@ class ReportController extends Controller
             0, // margin header
             0);
         $this->mpdf->SetHTMLFooter(view('reports/v2/footer', ['project' => $this->projectDetails,'companyDetails' => $this->companyDetails])->render());
-
+        $companyReport=$request['request_options']['owner_authorization'];
         $this->mpdf->WriteHTML(
             view("reports/v2/owner_authorization",
-                ['companyDetails' => $this->companyDetails ]
+                ['companyDetails' => $companyReport ]
             )->render()
         );
-    }*/
+    }
 
     public function termsNConditions()
     {
@@ -891,7 +942,6 @@ class ReportController extends Controller
     }
 
     public function estimatesTemplate($data){
-
         $this->mpdf->AddPage(
             '', // L - landscape, P - portrait
             '', // E-even|O-odd|even|odd|next-odd|next-even
@@ -1360,8 +1410,8 @@ class ReportController extends Controller
 //        dd($request->all());
 
         //<editor-fold desc="Validation">
-        $param_rules['title'] = "required|min:3|max:100";
-        $param_rules['editor1'] = "required|min:3";
+        // $param_rules['title'] = "required|min:3|max:100";
+        // $param_rules['editor1'] = "required|min:3";
         $param_rules['id'] = "nullable|int";
         $messages['editor1.required'] = "The Introduction field is required";
         $response = $this->__validateRequestParams($request->all(), $param_rules);
@@ -1375,13 +1425,20 @@ class ReportController extends Controller
         $request['content'] = $request['editor1'];
 
         $where = ['id' => $request->template_id,'company_id' => $request->company_id , 'identifier' => 'introduction'];
-
+        $cReport = ReportTemplate::where('company_id',$request->company_id)->whereNull('deleted_at')->where('identifier','introduction')->first();
+        if($cReport){
+        $cReport['content'] = $request['editor1'];
+        $cReport->save();
+        $this->__setFlash('success', 'Updated Successfully');
+        }
+    else{
         $reportTemplate = new ReportTemplate();
         $cReport = $reportTemplate->firstOrNew($where);
         $cReport->fill($request->all());
         $cReport->save();
-
         $this->__setFlash('success', 'Added Successfully');
+    }
+        
         $this->__is_paginate = false;
         $this->__is_collection = false;
         return $this->__sendResponse('Tag', [], 200,'Introduction added successfully.');

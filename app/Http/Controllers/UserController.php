@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Lang;
 use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
 use Illuminate\Support\Facades\Log;
+use Auth;
 
 class UserController extends Controller
 {
@@ -112,7 +113,6 @@ class UserController extends Controller
 //        Helper::pd($params,'$params');
         $params['column_index'] = $params['order'][0]['column'];
         $params['sort'] = $params['order'][0]['dir'];
-
         $params['parent_id'] = 0;
         $params['paginate'] = TRUE;
         $params['company_id'] = $request['company_id'];
@@ -130,9 +130,9 @@ class UserController extends Controller
         if (count(((array) $dataTableRecord['records']) )) {
 
             foreach ($dataTableRecord['records'] as $record) {
-                $options = '<a title="Edit" class="btn btn-sm btn-primary edit_form" href="/"  
+                $options = '<a title="Edit" class="btn btn-sm btn-primary edit_form" href="/"
                 data-id="' . $record->id . '"><i class="fa fa-edit"></i> </a>';
-                $options .= '<a title="Delete" style="margin-left:5px;" class="delete_row btn btn-sm btn-danger" 
+                $options .= '<a title="Delete" style="margin-left:5px;" class="delete_row btn btn-sm btn-danger"
                 data-module="require_photo" data-id="' . $record->id . '" href="javascript:void(0)"><i class="fa fa-trash"></i> </a>';
 
                 $records["data"][] = [
@@ -193,7 +193,7 @@ class UserController extends Controller
         if ($this->__is_error == true)
             return $response;
 
-        $request['password'] = $this->__encryptedPassword($request['password']);
+        // $request['password'] = $this->__encryptedPassword($request['password']);
 
         //$obj_user = User::find($request['user_id']);
         if ($request->hasFile('image_url')) {
@@ -564,6 +564,7 @@ class UserController extends Controller
      */
     public function updateAgent(Request $request)
     {
+
         $request['id'] = $user_id = (isset($request->target_id)) ? $request->target_id : $request['user_id'];
         $param_rules['id'] = 'required|exists:user';
 //        $param_rules['name'] = 'required|string|max:100';
@@ -583,10 +584,21 @@ class UserController extends Controller
 
         //$obj = User::where(['company_id' => 15, 'id' => $user_id]); //$request['user_id']
 
-        $name = explode(' ', $request['name']);
+        $name = explode(" ", $request['name']);
+        $first_name='';
+        $last_name='';
+        foreach($name as $key=>$val){
+        if($key==0){
+        $first_name=$val;
+        }else{
+        $last_name .= $val.' ';
+        }
+        }
+
+        // $name = explode(' ', $request['name']);
         $data = [
-            'first_name' => $name[0],
-            'last_name' => isset($name[1]) ? $name[1] : '',
+            'first_name' => trim($first_name),
+            'last_name' => trim($last_name),
 //            'email'         => $request['email'],
             'mobile_no' => $request['mobile_no'],
 //            'date_of_join'  => $request['date_of_join'],
@@ -781,6 +793,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request);
         /*dd($this->__encryptedPassword($request->password));
         dd($request->all());*/
 //        Log::info('login payload',$request->all());
@@ -809,8 +822,13 @@ class UserController extends Controller
         User::where(['id' => $user[0]->id])->update(['device_type' => $request->device_type ,'device_token' => $request->device_token]);
 
         if (!empty($request['remember_me'])) {
-            $response = new Response('test');
-            $response->withCookie(cookie('remember_me', $request->email, '518400'));
+           Cookie::queue('adminemail', $request->email,1440);
+           Cookie::queue('adminpwd', $request->password,1440);
+
+
+            // dd($request['remember_me']);
+            // $response = new Response('test');
+            // $response->withCookie(cookie('remember_me', $request->email, '518400'));
 
         } else {
 
